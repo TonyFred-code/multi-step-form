@@ -15,6 +15,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "md:lint": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
+    "md:lint:fix": "markdownlint-cli2 \"**/*.md\" --fix \"#node_modules\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
@@ -42,6 +44,7 @@
     "globals": "^17.5.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.5",
+    "markdownlint-cli2": "^0.22.1",
     "prettier": "^3.8.3",
     "vite": "^8.0.4"
   }
