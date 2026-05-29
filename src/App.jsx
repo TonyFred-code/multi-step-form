@@ -1,34 +1,219 @@
+import { useState } from "react";
+import PersonalInfo from "./components/PersonalInfo.jsx";
+import SideBar from "./components/SideBar.jsx";
+import { STEPS } from "./constants/steps.js";
+import TopBar from "./components/TopBar.jsx";
+import getPhoneInputErrorMessage from "./lib/getPhoneInputErrorMessage.js";
+
 export default function App() {
+  const [activeStepId, setActiveStepId] = useState(STEPS.STEP_1);
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState(null);
+  const [emailAddress, setEmailAddress] = useState("");
+  const [emailAddressError, setEmailAddressError] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [phoneNumberError, setPhoneNumberError] = useState(null);
+  const [numberErrorCode, setNumberErrorCode] = useState(null);
+
+  const showPreviousBtn = activeStepId === STEPS.STEP_2;
+
+  function isNameValid() {
+    return name.trim() !== "";
+  }
+
+  function isEmailAddressValid() {
+    return /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(emailAddress.trim());
+  }
+
+  function validatePersonalInfo() {
+    const nameValid = isNameValid();
+    const emailValid = isEmailAddressValid();
+
+    if (!nameValid) {
+      setNameError("This field is required");
+    }
+
+    if (!emailValid) {
+      setEmailAddressError(
+        emailAddress.trim() === ""
+          ? "This field is required"
+          : "Invalid email address"
+      );
+    }
+    const numberErrMsg = getPhoneInputErrorMessage(
+      phoneNumber,
+      numberErrorCode
+    );
+    const phoneNumberValid = numberErrMsg === null;
+
+    if (!phoneNumberValid) {
+      setPhoneNumberError(numberErrMsg);
+    }
+
+    if (!nameValid || !emailValid || !phoneNumberValid) return;
+
+    setNameError(null);
+    setEmailAddressError(null);
+    setPhoneNumberError(null);
+    setNumberErrorCode(null);
+    setActiveStepId(STEPS.STEP_2);
+  }
+
+  function handleNameInput(e) {
+    setName(e.target.value);
+    if (nameError) {
+      setNameError(null);
+    }
+  }
+
+  function handleEmailAddressInput(e) {
+    setEmailAddress(e.target.value);
+    if (emailAddressError) {
+      setEmailAddressError(null);
+    }
+  }
+
+  function validateNameInput() {
+    if (isNameValid()) {
+      setNameError(null);
+      return;
+    }
+
+    setNameError("This field is required");
+  }
+
+  function validateEmailAddressInput() {
+    if (emailAddress.trim() === "") {
+      setEmailAddressError("This field is required");
+      return;
+    }
+
+    if (isEmailAddressValid()) {
+      setEmailAddressError(null);
+      return;
+    }
+
+    setEmailAddressError("Invalid email address");
+  }
+
+  function previousStep() {
+    switch (activeStepId) {
+      case STEPS.STEP_2:
+        setActiveStepId(STEPS.STEP_1);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  function nextStep() {
+    switch (activeStepId) {
+      case STEPS.STEP_1:
+        validatePersonalInfo();
+        break;
+
+      default:
+        break;
+    }
+  }
+
   return (
-    <div>
-      {/* <!-- Sidebar start --> */}
-      Step 1 Your info Step 2 Select plan Step 3 Add-ons Step 4 Summary
-      {/* <!-- Sidebar end --> */}
-      {/* <!-- Step 1 start --> */}
-      Personal info Please provide your name, email address, and phone number.
-      Name e.g. Stephen King Email Address e.g. stephenking@lorem.com Phone
-      Number e.g. +1 234 567 890 Next Step
-      {/* <!-- Step 1 end --> */}
-      {/* <!-- Step 2 start --> */}
-      Select your plan You have the option of monthly or yearly billing. Arcade
-      $9/mo Advanced $12/mo Pro $15/mo Monthly Yearly Go Back Next Step
-      {/* <!-- Step 2 end --> */}
-      {/* <!-- Step 3 start --> */}
-      Pick add-ons Add-ons help enhance your gaming experience. Online service
-      Access to multiplayer games +$1/mo Larger storage Extra 1TB of cloud save
-      +$2/mo Customizable Profile Custom theme on your profile +$2/mo Go Back
-      Next Step
-      {/* <!-- Step 3 end --> */}
-      {/* <!-- Step 4 start --> */}
-      Finishing up Double-check everything looks OK before confirming.
-      {/* <!-- Dynamically add subscription and add-on selections here --> */}
-      Total (per month/year) Go Back Confirm
-      {/* <!-- Step 4 end --> */}
-      {/* <!-- Step 5 start --> */}
-      Thank you! Thanks for confirming your subscription! We hope you have fun
-      using our platform. If you ever need support, please feel free to email us
-      at support@loremgaming.com.
-      {/* <!-- Step 5 end --> */}
+    <div className="min-h-screen bg-[url('/images/bg-sidebar-mobile.svg')] bg-size-[100%_45.8vw] bg-no-repeat md:bg-none md:p-3 bg-blue-100 flex flex-col md:items-center md:justify-center ">
+      <main className=" md:bg-white flex flex-col md:flex-row px-4 py-8 flex-1 items-center md:items-stretch gap-8 md:max-w-4xl md:p-4 md:rounded-xl">
+        {/* <!-- Sidebar start --> */}
+        <div className="md:flex-1 md:bg-[url('/images/bg-sidebar-desktop.svg')] md:bg-no-repeat bg-size-[auto_100%] md:rounded-md md:p-5">
+          <TopBar activeStepId={activeStepId} />
+          <SideBar activeStepId={activeStepId} />
+        </div>
+        {/* <!-- Sidebar end --> */}
+        <form className="md:flex-2 bg-white md:bg-none rounded-xl py-6 px-4 sm:px-6 max-w-xl">
+          {/* <!-- Step 1 start --> */}
+          <PersonalInfo
+            name={name}
+            nameError={nameError}
+            activeStepId={activeStepId}
+            handleNameInput={handleNameInput}
+            nextStep={nextStep}
+            validateNameInput={validateNameInput}
+            emailAddress={emailAddress}
+            emailAddressError={emailAddressError}
+            handleEmailAddressInput={handleEmailAddressInput}
+            validateEmailAddressInput={validateEmailAddressInput}
+            phoneNumber={phoneNumber}
+            phoneNumberError={phoneNumberError}
+            setPhoneNumber={setPhoneNumber}
+            setPhoneNumberError={setPhoneNumberError}
+            numberErrorCode={numberErrorCode}
+            setPhoneNumberErrorCode={setNumberErrorCode}
+          />
+          {/* <!-- Step 1 end --> */}
+          {/* <!-- Step 2 start --> */}
+          <p className={`${activeStepId === STEPS.STEP_2 ? "flex" : "hidden"}`}>
+            Select your plan You have the option of monthly or yearly billing.
+            Arcade $9/mo Advanced $12/mo Pro $15/mo Monthly Yearly
+            <div
+              className={`hidden bg-white px-4 py-6 md:flex items-center ${showPreviousBtn ? "justify-between" : "justify-end"}`}
+            >
+              <button
+                onClick={previousStep}
+                type="button"
+                className={`cursor-pointer text-gray-500 hover:bg-blue-100 border border-transparent hover:border-gray-500 capitalize rounded py-3 px-5 font-medium hover:text-blue-950`}
+              >
+                go back
+              </button>
+              <button
+                type="button"
+                className={`cursor-pointer text-white capitalize bg-blue-950 rounded py-3 px-5 font-medium`}
+                onClick={nextStep}
+              >
+                next step
+              </button>
+            </div>
+          </p>
+          {/* <!-- Step 2 end --> */}
+          {/* <!-- Step 3 start --> */}
+          <p className={`${activeStepId === STEPS.STEP_3 ? "flex" : "hidden"}`}>
+            Pick add-ons Add-ons help enhance your gaming experience. Online
+            service Access to multiplayer games +$1/mo Larger storage Extra 1TB
+            of cloud save +$2/mo Customizable Profile Custom theme on your
+            profile +$2/mo Go Back Next Step
+          </p>
+          {/* <!-- Step 3 end --> */}
+          {/* <!-- Step 4 start --> */}
+          <p className={`${activeStepId === STEPS.STEP_4 ? "flex" : "hidden"}`}>
+            Finishing up Double-check everything looks OK before confirming.
+            {/* <!-- Dynamically add subscription and add-on selections here --> */}
+            Total (per month/year) Go Back Confirm
+          </p>
+          {/* <!-- Step 4 end --> */}
+        </form>
+        {/* <!-- Step 5 start --> */}
+        <p className={`${activeStepId === STEPS.STEP_5 ? "flex" : "hidden"}`}>
+          Thank you! Thanks for confirming your subscription! We hope you have
+          fun using our platform. If you ever need support, please feel free to
+          email us at support@loremgaming.com.
+        </p>
+        {/* <!-- Step 5 end --> */}
+      </main>
+      <div
+        className={`md:hidden bg-white px-4 py-6 flex items-center ${showPreviousBtn ? "justify-between" : "justify-end"}`}
+      >
+        <button
+          onClick={previousStep}
+          type="button"
+          className={`cursor-pointer text-gray-500 hover:bg-blue-100 border border-transparent hover:border-gray-500 capitalize rounded py-3 px-5 font-medium hover:text-blue-950 ${showPreviousBtn ? "flex" : "hidden"}`}
+        >
+          go back
+        </button>
+        <button
+          type="button"
+          className={`cursor-pointer text-white capitalize bg-blue-950 rounded py-3 px-5 font-medium`}
+          onClick={nextStep}
+        >
+          next step
+        </button>
+      </div>
     </div>
   );
 }
