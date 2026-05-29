@@ -44,3 +44,13 @@
   src: url("/fonts/Ubuntu-Regular.ttf");
   font-weight: 400;
 }
+
+@layer components {
+  .input-container {
+    & input {
+      @apply border px-4 py-3 rounded border-grey-500 hover:border-purple-600 focus-within:border-purple-600 outline-none w-full box-border;
+    }
+
+    @apply text-blue-950 font-medium;
+  }
+}
