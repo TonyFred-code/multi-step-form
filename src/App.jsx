@@ -145,7 +145,7 @@ export default function App() {
             setPhoneNumber={setPhoneNumber}
             setPhoneNumberError={setPhoneNumberError}
             numberErrorCode={numberErrorCode}
-            setPhoneNumberErrorCode={setNumberErrorCode}
+            setNumberErrorCode={setNumberErrorCode}
           />
           {/* <!-- Step 1 end --> */}
           {/* <!-- Step 2 start --> */}
