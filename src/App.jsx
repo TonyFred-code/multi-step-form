@@ -22,7 +22,7 @@ export default function App() {
   }
 
   function isEmailAddressValid() {
-    return /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(emailAddress.trim());
+    return /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(emailAddress.trim());
   }
 
   function validatePersonalInfo() {
