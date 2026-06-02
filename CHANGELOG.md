@@ -12,5 +12,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Created PersonalInfo component for personal info form step
-- Created PhoneInput component using `int-tel-input` package
+- Created PhoneInput component using `intl-tel-input` package
 - Added custom project fonts and selected theme colors to tailwindCSS
