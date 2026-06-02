@@ -11,7 +11,7 @@ export default function App() {
   const [nameError, setNameError] = useState(null);
   const [emailAddress, setEmailAddress] = useState("");
   const [emailAddressError, setEmailAddressError] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [phoneNumberError, setPhoneNumberError] = useState(null);
   const [numberErrorCode, setNumberErrorCode] = useState(null);
 
@@ -22,7 +22,7 @@ export default function App() {
   }
 
   function isEmailAddressValid() {
-    return /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(emailAddress.trim());
+    return /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(emailAddress.trim());
   }
 
   function validatePersonalInfo() {
@@ -145,11 +145,13 @@ export default function App() {
             setPhoneNumber={setPhoneNumber}
             setPhoneNumberError={setPhoneNumberError}
             numberErrorCode={numberErrorCode}
-            setPhoneNumberErrorCode={setNumberErrorCode}
+            setNumberErrorCode={setNumberErrorCode}
           />
           {/* <!-- Step 1 end --> */}
           {/* <!-- Step 2 start --> */}
-          <p className={`${activeStepId === STEPS.STEP_2 ? "flex" : "hidden"}`}>
+          <section
+            className={`${activeStepId === STEPS.STEP_2 ? "flex" : "hidden"}`}
+          >
             Select your plan You have the option of monthly or yearly billing.
             Arcade $9/mo Advanced $12/mo Pro $15/mo Monthly Yearly
             <div
@@ -170,7 +172,7 @@ export default function App() {
                 next step
               </button>
             </div>
-          </p>
+          </section>
           {/* <!-- Step 2 end --> */}
           {/* <!-- Step 3 start --> */}
           <p className={`${activeStepId === STEPS.STEP_3 ? "flex" : "hidden"}`}>

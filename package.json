@@ -1,7 +1,7 @@
 {
   "name": "multi-step-form-main",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "@intl-tel-input/react": "^29.0.3",
     "@tailwindcss/vite": "^4.3.0",
     "intl-tel-input": "^29.0.3",
+    "prop-types": "^15.8.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "tailwindcss": "^4.3.0"
@@ -50,7 +51,6 @@
     "lint-staged": "^17.0.5",
     "markdownlint-cli2": "^0.22.1",
     "prettier": "^3.8.3",
-    "prop-types": "^15.8.1",
     "vite": "^8.0.4"
   }
 }

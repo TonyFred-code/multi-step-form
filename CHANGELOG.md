@@ -7,10 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.1.1] - 2026-06-02
+
+### Fixed
+
+- Fixed a bug on the Personal Information form that prevented user details
+  from saving correctly.
+- Resolved an issue where valid email addresses containing capital letters were
+  incorrectly flagged as invalid.
+- Fixed a silent error that caused the phone number input field to freeze or
+  behave unpredictably on page load.
+
+---
+
 ## [0.1.0] - 2026-05-29
 
 ### Added
 
-- Created PersonalInfo component for personal info form step
-- Created PhoneInput component using `int-tel-input` package
-- Added custom project fonts and selected theme colors to tailwindCSS
+- Introduced the **Personal Information** step to the user registration flow.
+- Added an international phone number input field featuring automatic
+  country-code formatting.
+- Integrated the official project design system, including custom typography
+  and brand theme colors.
