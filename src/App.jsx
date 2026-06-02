@@ -149,7 +149,9 @@ export default function App() {
           />
           {/* <!-- Step 1 end --> */}
           {/* <!-- Step 2 start --> */}
-          <p className={`${activeStepId === STEPS.STEP_2 ? "flex" : "hidden"}`}>
+          <section
+            className={`${activeStepId === STEPS.STEP_2 ? "flex" : "hidden"}`}
+          >
             Select your plan You have the option of monthly or yearly billing.
             Arcade $9/mo Advanced $12/mo Pro $15/mo Monthly Yearly
             <div
@@ -170,7 +172,7 @@ export default function App() {
                 next step
               </button>
             </div>
-          </p>
+          </section>
           {/* <!-- Step 2 end --> */}
           {/* <!-- Step 3 start --> */}
           <p className={`${activeStepId === STEPS.STEP_3 ? "flex" : "hidden"}`}>
