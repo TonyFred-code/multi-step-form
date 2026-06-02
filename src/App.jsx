@@ -11,7 +11,7 @@ export default function App() {
   const [nameError, setNameError] = useState(null);
   const [emailAddress, setEmailAddress] = useState("");
   const [emailAddressError, setEmailAddressError] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [phoneNumberError, setPhoneNumberError] = useState(null);
   const [numberErrorCode, setNumberErrorCode] = useState(null);
 
