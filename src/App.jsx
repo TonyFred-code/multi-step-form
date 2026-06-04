@@ -5,7 +5,7 @@ import { STEPS } from "./constants/steps.js";
 import TopBar from "./components/TopBar.jsx";
 import getPhoneInputErrorMessage from "./lib/getPhoneInputErrorMessage.js";
 import SelectPlan from "./components/SelectPlan.jsx";
-import { PLANS } from "./constants/plansPricing.js";
+import { PLANS, PRICING_TERMS } from "./constants/plansPricing.js";
 
 export default function App() {
   const [activeStepId, setActiveStepId] = useState(STEPS.STEP_1);
@@ -17,6 +17,7 @@ export default function App() {
   const [phoneNumberError, setPhoneNumberError] = useState(null);
   const [numberErrorCode, setNumberErrorCode] = useState(null);
   const [plan, setPlan] = useState(PLANS[0].NAME);
+  const [pricingTerm, setPricingTerm] = useState(PRICING_TERMS.MONTHLY);
 
   const showPreviousBtn = activeStepId === STEPS.STEP_2;
 
@@ -78,6 +79,15 @@ export default function App() {
 
   function handleChangePlan(e) {
     setPlan(e.target.value);
+  }
+
+  function togglePricingTerm() {
+    if (pricingTerm === PRICING_TERMS.MONTHLY) {
+      setPricingTerm(PRICING_TERMS.YEARLY);
+      return;
+    }
+
+    setPricingTerm(PRICING_TERMS.MONTHLY);
   }
 
   function validateNameInput() {
@@ -163,6 +173,8 @@ export default function App() {
             handleChangePlan={handleChangePlan}
             previousStep={previousStep}
             nextStep={nextStep}
+            pricingTerm={pricingTerm}
+            togglePricingTerm={togglePricingTerm}
           />
           {/* <!-- Step 2 end --> */}
           {/* <!-- Step 3 start --> */}

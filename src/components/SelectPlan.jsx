@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   PLANS,
   PRICING_TERMS,
@@ -6,7 +5,7 @@ import {
 } from "../constants/plansPricing.js";
 import TogglePricingTerm from "./ui/ToggleButton.jsx";
 import { STEPS } from "../constants/steps.js";
-import { func, string } from "prop-types";
+import { func, oneOf, string } from "prop-types";
 
 export default function SelectPlan({
   activeStepId,
@@ -14,19 +13,10 @@ export default function SelectPlan({
   handleChangePlan,
   previousStep,
   nextStep,
+  pricingTerm,
+  togglePricingTerm,
 }) {
-  const [pricingTerm, setPricingTerm] = useState(PRICING_TERMS.MONTHLY);
-
   const isYearly = pricingTerm === PRICING_TERMS.YEARLY;
-
-  function togglePricingTerm() {
-    if (pricingTerm === PRICING_TERMS.MONTHLY) {
-      setPricingTerm(PRICING_TERMS.YEARLY);
-      return;
-    }
-
-    setPricingTerm(PRICING_TERMS.MONTHLY);
-  }
 
   return (
     <section
@@ -115,4 +105,6 @@ SelectPlan.propTypes = {
   handleChangePlan: func.isRequired,
   previousStep: func.isRequired,
   nextStep: func.isRequired,
+  pricingTerm: oneOf([PRICING_TERMS.MONTHLY, PRICING_TERMS.YEARLY]).isRequired,
+  togglePricingTerm: func.isRequired,
 };
