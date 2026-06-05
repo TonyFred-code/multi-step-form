@@ -14,7 +14,7 @@ const ADD_ONS = [
     NAME: "larger storage",
     [PRICING_TERMS.MONTHLY]: 2,
     [PRICING_TERMS.YEARLY]: 20,
-    DESC: "Extra 1TB Of cloud save",
+    DESC: "Extra 1TB of cloud save",
   },
 
   {
