@@ -64,6 +64,8 @@ export default function PhoneInput({
         inputProps={{
           id: "phone",
           onBlur: handleSetPhoneNumberError,
+          "data-invalid": phoneNumberError !== null,
+          "aria-invalid": phoneNumberError ? "true" : undefined,
         }}
         value={phoneNumber}
         containerClass="input-container"

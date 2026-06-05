@@ -4,6 +4,8 @@ import SideBar from "./components/SideBar.jsx";
 import { STEPS } from "./constants/steps.js";
 import TopBar from "./components/TopBar.jsx";
 import getPhoneInputErrorMessage from "./lib/getPhoneInputErrorMessage.js";
+import SelectPlan from "./components/SelectPlan.jsx";
+import { PLANS, PRICING_TERMS } from "./constants/plansPricing.js";
 
 export default function App() {
   const [activeStepId, setActiveStepId] = useState(STEPS.STEP_1);
@@ -14,6 +16,8 @@ export default function App() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [phoneNumberError, setPhoneNumberError] = useState(null);
   const [numberErrorCode, setNumberErrorCode] = useState(null);
+  const [plan, setPlan] = useState(PLANS[0].NAME);
+  const [pricingTerm, setPricingTerm] = useState(PRICING_TERMS.MONTHLY);
 
   const showPreviousBtn = activeStepId === STEPS.STEP_2;
 
@@ -73,6 +77,19 @@ export default function App() {
     }
   }
 
+  function handleChangePlan(e) {
+    setPlan(e.target.value);
+  }
+
+  function togglePricingTerm() {
+    if (pricingTerm === PRICING_TERMS.MONTHLY) {
+      setPricingTerm(PRICING_TERMS.YEARLY);
+      return;
+    }
+
+    setPricingTerm(PRICING_TERMS.MONTHLY);
+  }
+
   function validateNameInput() {
     if (isNameValid()) {
       setNameError(null);
@@ -120,7 +137,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[url('/images/bg-sidebar-mobile.svg')] bg-size-[100%_45.8vw] bg-no-repeat md:bg-none md:p-3 bg-blue-100 flex flex-col md:items-center md:justify-center ">
-      <main className=" md:bg-white flex flex-col md:flex-row px-4 py-8 flex-1 items-center md:items-stretch gap-8 md:max-w-4xl md:p-4 md:rounded-xl">
+      <main className=" md:bg-white flex flex-col md:flex-row px-4 py-8 flex-1 items-center md:items-stretch gap-8 md:max-w-4xl lg:max-w-6xl md:w-10/12 md:p-4 md:rounded-xl">
         {/* <!-- Sidebar start --> */}
         <div className="md:flex-1 md:bg-[url('/images/bg-sidebar-desktop.svg')] md:bg-no-repeat bg-size-[auto_100%] md:rounded-md md:p-5">
           <TopBar activeStepId={activeStepId} />
@@ -149,30 +166,16 @@ export default function App() {
           />
           {/* <!-- Step 1 end --> */}
           {/* <!-- Step 2 start --> */}
-          <section
-            className={`${activeStepId === STEPS.STEP_2 ? "flex" : "hidden"}`}
-          >
-            Select your plan You have the option of monthly or yearly billing.
-            Arcade $9/mo Advanced $12/mo Pro $15/mo Monthly Yearly
-            <div
-              className={`hidden bg-white px-4 py-6 md:flex items-center ${showPreviousBtn ? "justify-between" : "justify-end"}`}
-            >
-              <button
-                onClick={previousStep}
-                type="button"
-                className={`cursor-pointer text-gray-500 hover:bg-blue-100 border border-transparent hover:border-gray-500 capitalize rounded py-3 px-5 font-medium hover:text-blue-950`}
-              >
-                go back
-              </button>
-              <button
-                type="button"
-                className={`cursor-pointer text-white capitalize bg-blue-950 rounded py-3 px-5 font-medium`}
-                onClick={nextStep}
-              >
-                next step
-              </button>
-            </div>
-          </section>
+
+          <SelectPlan
+            activeStepId={activeStepId}
+            activePlan={plan}
+            handleChangePlan={handleChangePlan}
+            previousStep={previousStep}
+            nextStep={nextStep}
+            pricingTerm={pricingTerm}
+            togglePricingTerm={togglePricingTerm}
+          />
           {/* <!-- Step 2 end --> */}
           {/* <!-- Step 3 start --> */}
           <p className={`${activeStepId === STEPS.STEP_3 ? "flex" : "hidden"}`}>

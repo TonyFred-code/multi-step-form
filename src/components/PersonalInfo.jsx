@@ -49,10 +49,11 @@ export default function PersonalInfo({
             name="name"
             id="name"
             placeholder="e.g. Stephen King"
-            className="border px-4 py-3 rounded border-grey-500 hover:border-purple-600 focus-within:border-purple-600 outline-none text-blue-950 font-medium w-full box-border"
+            className={`border px-4 py-3 rounded hover:border-purple-600 focus-within:border-purple-600 outline-none text-blue-950 font-medium w-full box-border ${nameError ? "border-red-500 bg-red-500/10 placeholder:text-red-500/50" : "border-grey-500"}`}
             value={name}
             onChange={handleNameInput}
             onBlur={validateNameInput}
+            aria-invalid={nameError ? "true" : undefined}
           />
         </div>
 
@@ -74,10 +75,11 @@ export default function PersonalInfo({
             id="email"
             autoComplete="email"
             placeholder="e.g. stephenking@lorem.com"
-            className="border px-4 py-3 rounded border-grey-500 hover:border-purple-600 focus-within:border-purple-600 outline-none text-blue-950 font-medium box-border w-full"
+            className={`border px-4 py-3 rounded hover:border-purple-600 focus-within:border-purple-600 outline-none text-blue-950 font-medium w-full box-border ${emailAddressError ? "border-red-500 bg-red-500/10 placeholder:text-red-500/50" : "border-grey-500"}`}
             value={emailAddress}
             onChange={handleEmailAddressInput}
             onBlur={validateEmailAddressInput}
+            aria-invalid={emailAddressError ? "true" : undefined}
           />
         </div>
 

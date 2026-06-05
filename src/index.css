@@ -51,6 +51,10 @@
       @apply border px-4 py-3 rounded border-grey-500 hover:border-purple-600 focus-within:border-purple-600 outline-none w-full box-border;
     }
 
+    & input[data-invalid="true"] {
+      @apply border-red-500 bg-red-500/10 placeholder:text-red-500/50;
+    }
+
     @apply text-blue-950 font-medium;
   }
 }
