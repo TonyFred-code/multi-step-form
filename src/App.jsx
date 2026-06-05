@@ -6,6 +6,7 @@ import TopBar from "./components/TopBar.jsx";
 import getPhoneInputErrorMessage from "./lib/getPhoneInputErrorMessage.js";
 import SelectPlan from "./components/SelectPlan.jsx";
 import { PLANS, PRICING_TERMS } from "./constants/plansPricing.js";
+import PickAddOns from "./components/PickAddOns.jsx";
 
 export default function App() {
   const [activeStepId, setActiveStepId] = useState(STEPS.STEP_1);
@@ -18,8 +19,10 @@ export default function App() {
   const [numberErrorCode, setNumberErrorCode] = useState(null);
   const [plan, setPlan] = useState(PLANS[0].NAME);
   const [pricingTerm, setPricingTerm] = useState(PRICING_TERMS.MONTHLY);
+  const [addOns, setAddOns] = useState(new Set());
 
-  const showPreviousBtn = activeStepId === STEPS.STEP_2;
+  const showPreviousBtn =
+    activeStepId === STEPS.STEP_2 || activeStepId === STEPS.STEP_3;
 
   function isNameValid() {
     return name.trim() !== "";
@@ -81,6 +84,14 @@ export default function App() {
     setPlan(e.target.value);
   }
 
+  function handleAddOnToggle(addOnId) {
+    setAddOns((prev) => {
+      const next = new Set(prev);
+      next.has(addOnId) ? next.delete(addOnId) : next.add(addOnId);
+      return next;
+    });
+  }
+
   function togglePricingTerm() {
     if (pricingTerm === PRICING_TERMS.MONTHLY) {
       setPricingTerm(PRICING_TERMS.YEARLY);
@@ -119,6 +130,10 @@ export default function App() {
         setActiveStepId(STEPS.STEP_1);
         break;
 
+      case STEPS.STEP_3:
+        setActiveStepId(STEPS.STEP_2);
+        break;
+
       default:
         break;
     }
@@ -128,6 +143,10 @@ export default function App() {
     switch (activeStepId) {
       case STEPS.STEP_1:
         validatePersonalInfo();
+        break;
+
+      case STEPS.STEP_2:
+        setActiveStepId(STEPS.STEP_3);
         break;
 
       default:
@@ -178,12 +197,14 @@ export default function App() {
           />
           {/* <!-- Step 2 end --> */}
           {/* <!-- Step 3 start --> */}
-          <p className={`${activeStepId === STEPS.STEP_3 ? "flex" : "hidden"}`}>
-            Pick add-ons Add-ons help enhance your gaming experience. Online
-            service Access to multiplayer games +$1/mo Larger storage Extra 1TB
-            of cloud save +$2/mo Customizable Profile Custom theme on your
-            profile +$2/mo Go Back Next Step
-          </p>
+          <PickAddOns
+            activeStepId={activeStepId}
+            previousStep={previousStep}
+            nextStep={nextStep}
+            addOnsList={addOns}
+            handleAddOnToggle={handleAddOnToggle}
+            pricingTerm={pricingTerm}
+          />
           {/* <!-- Step 3 end --> */}
           {/* <!-- Step 4 start --> */}
           <p className={`${activeStepId === STEPS.STEP_4 ? "flex" : "hidden"}`}>
