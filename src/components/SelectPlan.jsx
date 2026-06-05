@@ -39,7 +39,7 @@ export default function SelectPlan({
                 type="radio"
                 name="plan"
                 id={NAME}
-                className="peer hidden"
+                className="peer sr-only"
                 checked={NAME === activePlan}
                 value={NAME}
                 onChange={handleChangePlan}

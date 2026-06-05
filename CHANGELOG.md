@@ -7,17 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.2.1] - 2026-06-05
+
+### Fixed
+
+- Updated form inputs to make them available on the accessibility tree and reachable
+  via keyboard focus navigation
+
+---
+
 ## [0.2.0] - 2026-06-04
 
 ### Added
 
-- Included a new form section allowing a user to select choice plan and its
+- Included a new form section allowing a user to select a plan and its
   billing cycle (monthly or yearly).
 
 ### Changed
 
 - Extended form field validation by including highly visible and accessible error
-  indicators to alert users of invalid inputs
+  indicators to alert users of invalid inputs.
 
 ---
 

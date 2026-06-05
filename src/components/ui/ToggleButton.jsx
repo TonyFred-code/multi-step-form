@@ -17,7 +17,7 @@ export default function TogglePricingTerm({ pricingTerm, togglePricingTerm }) {
       <div className="relative inline-block h-4 w-8">
         <input
           type="checkbox"
-          className="hidden peer"
+          className="sr-only peer"
           id="pricing_term"
           name="pricing_term"
           checked={checked}
