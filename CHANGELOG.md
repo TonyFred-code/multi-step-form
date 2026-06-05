@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.3.0] - 2026-06-05
+
+### Added
+
+- Introduced the **Select Add-ons** form section
+
+### Changed
+
+- Included visual indicators for keyboard focused form input elements on plan
+  selection form section
+
+---
+
 ## [0.2.1] - 2026-06-05
 
 ### Fixed

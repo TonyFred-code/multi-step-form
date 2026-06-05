@@ -34,7 +34,10 @@ export default function SelectPlan({
           const { NAME, ICON_URL } = plan;
 
           return (
-            <li key={NAME} className="lg:flex-1">
+            <li
+              key={NAME}
+              className="lg:flex-1 focus-within:ring-3 focus-within:ring-purple-600/10 rounded-md"
+            >
               <input
                 type="radio"
                 name="plan"
@@ -46,7 +49,7 @@ export default function SelectPlan({
               />
               <label
                 htmlFor={NAME}
-                className="p-3 peer-checked:bg-blue-100 border border-blue-300 flex gap-3 rounded-md peer-checked:border-purple-600 items-center lg:flex-col lg:items-start lg:gap-8"
+                className="p-3 peer-checked:bg-blue-100 border border-blue-300 flex gap-3 rounded-md peer-checked:border-purple-600 items-center lg:flex-col lg:items-start lg:gap-8 hover:border-purple-600 cursor-pointer peer-focus-visible:border-purple-600"
               >
                 <span className="self-start flex items-center justify-center size-8 md:size-10 lg:size-12">
                   <img src={ICON_URL} alt="" />

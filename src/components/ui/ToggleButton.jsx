@@ -14,7 +14,7 @@ export default function TogglePricingTerm({ pricingTerm, togglePricingTerm }) {
       >
         monthly
       </label>
-      <div className="relative inline-block h-4 w-8">
+      <div className="relative inline-block h-4 w-8 focus-within:ring-3 focus-within:ring-purple-600/50 rounded-full">
         <input
           type="checkbox"
           className="sr-only peer"
