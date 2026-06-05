@@ -37,14 +37,14 @@ export default function PickAddOns({
               <input
                 type="checkbox"
                 name="addon"
-                id={NAME}
+                id={`addOn-${ID}`}
                 className="peer sr-only"
                 checked={checked}
                 value={NAME}
                 onChange={() => handleAddOnToggle(ID)}
               />
               <label
-                htmlFor={NAME}
+                htmlFor={`addOn-${ID}`}
                 className="p-3 peer-checked:bg-blue-100 border border-blue-300 flex gap-3 rounded-md peer-checked:border-purple-600 items-center lg:gap-8 hover:border-purple-600 cursor-pointer peer-focus-visible:border-purple-600"
               >
                 <span
