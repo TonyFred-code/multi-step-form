@@ -7,6 +7,7 @@ import getPhoneInputErrorMessage from "./lib/getPhoneInputErrorMessage.js";
 import SelectPlan from "./components/SelectPlan.jsx";
 import { PLANS, PRICING_TERMS } from "./constants/plansPricing.js";
 import PickAddOns from "./components/PickAddOns.jsx";
+import Summary from "./components/Summary.jsx";
 
 export default function App() {
   const [activeStepId, setActiveStepId] = useState(STEPS.STEP_1);
@@ -134,6 +135,10 @@ export default function App() {
         setActiveStepId(STEPS.STEP_2);
         break;
 
+      case STEPS.STEP_4:
+        setActiveStepId(STEPS.STEP_3);
+        break;
+
       default:
         break;
     }
@@ -147,6 +152,10 @@ export default function App() {
 
       case STEPS.STEP_2:
         setActiveStepId(STEPS.STEP_3);
+        break;
+
+      case STEPS.STEP_3:
+        setActiveStepId(STEPS.STEP_4);
         break;
 
       default:
@@ -207,11 +216,15 @@ export default function App() {
           />
           {/* <!-- Step 3 end --> */}
           {/* <!-- Step 4 start --> */}
-          <p className={`${activeStepId === STEPS.STEP_4 ? "flex" : "hidden"}`}>
-            Finishing up Double-check everything looks OK before confirming.
-            {/* <!-- Dynamically add subscription and add-on selections here --> */}
-            Total (per month/year) Go Back Confirm
-          </p>
+          <Summary
+            activeStepId={activeStepId}
+            addOnIds={addOns}
+            setActiveStepId={setActiveStepId}
+            nextStep={nextStep}
+            previousStep={previousStep}
+            plan={plan}
+            pricingTerm={pricingTerm}
+          />
           {/* <!-- Step 4 end --> */}
         </form>
         {/* <!-- Step 5 start --> */}
