@@ -1,4 +1,4 @@
-import { func, instanceOf, oneOf, string } from "prop-types";
+import { bool, func, instanceOf, oneOf, string } from "prop-types";
 import { STEPS } from "../constants/steps.js";
 import { PLANS, PRICING_TERMS } from "../constants/plansPricing.js";
 import { ADD_ONS } from "../constants/addOns.js";
@@ -11,6 +11,7 @@ export default function Summary({
   addOnIds,
   plan,
   setActiveStepId,
+  showSuccess,
 }) {
   const isYearly = pricingTerm === PRICING_TERMS.YEARLY;
   const activePlan = PLANS.find((p) => p.NAME === plan);
@@ -29,7 +30,7 @@ export default function Summary({
 
   return (
     <section
-      className={`${activeStepId === STEPS.STEP_4 ? "flex" : "hidden"} flex-col h-full gap-5`}
+      className={`${activeStepId === STEPS.STEP_4 && !showSuccess ? "flex" : "hidden"} flex-col h-full gap-5`}
     >
       <header className="space-y-px">
         <h2 className="text-blue-950 text-xl font-bold md:text-3xl lg:text-5xl">
@@ -115,6 +116,7 @@ Summary.propTypes = {
   previousStep: func.isRequired,
   pricingTerm: oneOf([PRICING_TERMS.MONTHLY, PRICING_TERMS.YEARLY]).isRequired,
   setActiveStepId: func.isRequired,
-  addOnIds: instanceOf(Set),
+  addOnIds: instanceOf(Set).isRequired,
   plan: string.isRequired,
+  showSuccess: bool.isRequired,
 };
