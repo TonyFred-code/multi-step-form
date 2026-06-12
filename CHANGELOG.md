@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.5.0] - 2026-06-12
+
+### Added
+
+- Introduced **Confirmation** form section to the registration flow as end state
+
+### Fixed
+
+- Reduced page width of form container to prevent awkward page layout rendering
+
+---
+
 ## [0.4.0] - 2026-06-06
 
 ### Added
