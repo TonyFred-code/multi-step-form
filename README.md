@@ -14,6 +14,10 @@ realistic projects.
 - [My process](#my-process)
   - [Built with](#built-with)
   - [AI Collaboration](#ai-collaboration)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Development Build](#development-build)
+  - [Production Build](#production-build)
 - [Author](#author)
 
 ## Overview
@@ -65,7 +69,7 @@ Solution Built:
 ### AI Collaboration
 
 Work with `Claude` as described in
-[AGENTS Collaboration Specification](./AGENTS.md) file
+[AGENTS Collaboration Specification](./CLAUDE.md) file
 
 ## Getting Started
 
