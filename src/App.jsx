@@ -22,7 +22,8 @@ export default function App() {
   const [plan, setPlan] = useState(PLANS[0].NAME);
   const [pricingTerm, setPricingTerm] = useState(PRICING_TERMS.MONTHLY);
   const [addOns, setAddOns] = useState(new Set());
-  const [showSuccess, setShowSuccess] = useState(false);
+
+  const showSuccess = activeStepId === STEPS.STEP_5;
 
   const showPreviousBtn =
     activeStepId === STEPS.STEP_2 || activeStepId === STEPS.STEP_3;
@@ -161,7 +162,7 @@ export default function App() {
         break;
 
       case STEPS.STEP_4:
-        setShowSuccess(true);
+        setActiveStepId(STEPS.STEP_5);
         break;
 
       default:

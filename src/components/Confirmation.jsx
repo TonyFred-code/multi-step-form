@@ -1,5 +1,4 @@
 import { bool } from "prop-types";
-import { STEPS } from "../constants/steps.js";
 
 export default function Confirmation({ showSuccess }) {
   return (
