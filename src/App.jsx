@@ -8,6 +8,7 @@ import SelectPlan from "./components/SelectPlan.jsx";
 import { PLANS, PRICING_TERMS } from "./constants/plansPricing.js";
 import PickAddOns from "./components/PickAddOns.jsx";
 import Summary from "./components/Summary.jsx";
+import Confirmation from "./components/Confirmation.jsx";
 
 export default function App() {
   const [activeStepId, setActiveStepId] = useState(STEPS.STEP_1);
@@ -21,6 +22,7 @@ export default function App() {
   const [plan, setPlan] = useState(PLANS[0].NAME);
   const [pricingTerm, setPricingTerm] = useState(PRICING_TERMS.MONTHLY);
   const [addOns, setAddOns] = useState(new Set());
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const showPreviousBtn =
     activeStepId === STEPS.STEP_2 || activeStepId === STEPS.STEP_3;
@@ -158,6 +160,10 @@ export default function App() {
         setActiveStepId(STEPS.STEP_4);
         break;
 
+      case STEPS.STEP_4:
+        setShowSuccess(true);
+        break;
+
       default:
         break;
     }
@@ -165,14 +171,16 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[url('/images/bg-sidebar-mobile.svg')] bg-size-[100%_45.8vw] bg-no-repeat md:bg-none md:p-3 bg-blue-100 flex flex-col md:items-center md:justify-center ">
-      <main className=" md:bg-white flex flex-col md:flex-row px-4 py-8 flex-1 items-center md:items-stretch gap-8 md:max-w-4xl lg:max-w-6xl md:w-10/12 md:p-4 md:rounded-xl">
+      <main className=" md:bg-white flex flex-col md:flex-row px-4 py-8 flex-1 items-center md:items-stretch gap-8 md:max-w-4xl md:w-10/12 md:p-4 md:rounded-xl">
         {/* <!-- Sidebar start --> */}
         <div className="md:flex-1 md:bg-[url('/images/bg-sidebar-desktop.svg')] md:bg-no-repeat bg-size-[auto_100%] md:rounded-md md:p-5">
           <TopBar activeStepId={activeStepId} />
           <SideBar activeStepId={activeStepId} />
         </div>
         {/* <!-- Sidebar end --> */}
-        <form className="md:flex-2 bg-white md:bg-none rounded-xl py-6 px-4 sm:px-6 max-w-xl">
+        <form
+          className={`md:flex-2 bg-white md:bg-none rounded-xl py-6 px-4 sm:px-6 max-w-xl ${showSuccess ? "hidden" : "block"}`}
+        >
           {/* <!-- Step 1 start --> */}
           <PersonalInfo
             name={name}
@@ -224,19 +232,16 @@ export default function App() {
             previousStep={previousStep}
             plan={plan}
             pricingTerm={pricingTerm}
+            showSuccess={showSuccess}
           />
           {/* <!-- Step 4 end --> */}
         </form>
         {/* <!-- Step 5 start --> */}
-        <p className={`${activeStepId === STEPS.STEP_5 ? "flex" : "hidden"}`}>
-          Thank you! Thanks for confirming your subscription! We hope you have
-          fun using our platform. If you ever need support, please feel free to
-          email us at support@loremgaming.com.
-        </p>
+        <Confirmation showSuccess={showSuccess} />
         {/* <!-- Step 5 end --> */}
       </main>
       <div
-        className={`md:hidden bg-white px-4 py-6 flex items-center ${showPreviousBtn ? "justify-between" : "justify-end"}`}
+        className={`md:hidden bg-white px-4 py-6 items-center ${showPreviousBtn ? "justify-between" : "justify-end"} ${showSuccess ? "hidden" : "flex"}`}
       >
         <button
           onClick={previousStep}

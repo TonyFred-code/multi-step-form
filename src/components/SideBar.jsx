@@ -1,5 +1,5 @@
 import { bool, number, string } from "prop-types";
-import { STEPS_LIST } from "../constants/steps.js";
+import { STEPS, STEPS_LIST } from "../constants/steps.js";
 
 function StepIndicator({ title, step, isActive }) {
   return (
@@ -26,12 +26,15 @@ StepIndicator.propTypes = {
 };
 
 export default function SideBar({ activeStepId }) {
+  const displayedStepId =
+    activeStepId === STEPS.STEP_5 ? STEPS.STEP_4 : activeStepId;
+
   return (
     <aside className="hidden md:block">
       <ul className="flex flex-col gap-4">
         {STEPS_LIST.map((stepDetails) => {
           const { id, title, step } = stepDetails;
-          const isActive = id === activeStepId;
+          const isActive = id === displayedStepId;
 
           return (
             <li key={id} className="flex gap-4 items-center">
